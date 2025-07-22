@@ -7,14 +7,15 @@ The Figma MCP Agent is capable of extracting code, variable definitions, and con
 
 Below are the tools and their descriptions:
 
-1. get_code: Retrieves the code for a specified node in a Figma document. The node is identified by its nodeId, and the request includes clientLanguages, clientFrameworks, and clientName for logging purposes to track the programming languages, frameworks, and client making the request.    
+1. get_code: This tool turns a Figma design into code, usually in React with Tailwind styling. It tracks the app and coding styles you’re using (like JavaScript or React) for records. Usage: Ask for different styles, like “Make my Figma design in Vue” or “Use plain HTML and CSS.” You can also use your own components by saying, “Use my components from src/components/ui.” Just select your design in Figma or share a link first. Check Figma’s guide to set up Code Connect for reusing components.  
 
-2. get_variable_defs: Fetches the variable definitions associated with a specified node in a Figma document. The node is identified by its nodeId, with clientLanguages, clientFrameworks, and clientName provided for logging to understand the languages, frameworks, and client context.  
+2. get_variable_defs: This tool lists design details like colors or spacing used in your Figma design. It keeps track of the app and coding styles for logging. Usage: Ask “What details are in my Figma design?” for all details, “What colors are used?” for specific ones, or “Show names and values of design details” to see everything clearly.  
 
-3. get_code_connect_map: Obtains the code connect map for a specified node in a Figma document. The node is identified by its nodeId, and the request includes clientLanguages, clientFrameworks, and clientName for logging purposes to monitor the languages, frameworks, and client involved.  
+3. get_code_connect_map: This tool links your Figma design to the code components in your project, showing where each component lives (like a file path) and its name. It tracks app and coding styles for records. Usage: Use it to find which code matches your Figma design, making sure the right components are used when building.  
 
-4. get_image: Retrieves the image associated with a specified node in a Figma document. The node is identified by its nodeId, with clientLanguages, clientFrameworks, and clientName included for logging to track the programming languages, frameworks, and client making the request.
+4. get_image: This tool takes a screenshot of your Figma design to keep its look accurate. It tracks the app and coding styles for logging. You need to turn it on in Figma’s settings (Preferences > Dev Mode > Enable get_image). Usage: Enable it to capture your design’s look; keep it on unless you’re saving on limits.  
 
+NOTE: Ensure to run Figma Dev Mode MCP Server before using this agent by following: [Figma MCP Documentation](https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Dev-Mode-MCP-Server)
 
 ## Details
 - **Framework**: LangChain

@@ -1,4 +1,4 @@
-## [Github MCP Agent](https://github.com/Coral-Protocol/Coral-GithubMCP-Agent)
+## [Figma MCP Agent](https://github.com/Coral-Protocol/Coral-FigmaMCP-Agent)
 
 The Figma MCP Agent is an open-source agent designed to  bring Figma MCP features directly into your agentic system by providing important design information and context to AI agents generating code from Figma design files.
 

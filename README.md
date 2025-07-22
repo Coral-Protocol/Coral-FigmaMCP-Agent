@@ -5,7 +5,7 @@ The Figma MCP Agent is an open-source agent designed to  bring Figma MCP feature
 ## Responsibility
 The Figma MCP Agent is capable of extracting code, variable definitions, and connection mappings from Figma design nodes, generating images from design elements, and creating design system rules tailored to client programming languages and frameworks.
 
-Below are the tools and their descriptions in pointers:
+Below are the tools and their descriptions:
 
 1. get_code: Retrieves the code for a specified node in a Figma document. The node is identified by its nodeId, and the request includes clientLanguages, clientFrameworks, and clientName for logging purposes to track the programming languages, frameworks, and client making the request.    
 

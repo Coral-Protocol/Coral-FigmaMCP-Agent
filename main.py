@@ -41,25 +41,23 @@ async def create_agent(coral_tools, agent_tools):
     ])
 
     model = init_chat_model(
-            model=os.getenv("MODEL_NAME", "gpt-4.1-mini"),
-            model_provider=os.getenv("MODEL_PROVIDER", "openai"),
-            api_key=os.getenv("API_KEY"),
-            temperature=os.getenv("MODEL_TEMPERATURE", "0.1"),
-            max_tokens=os.getenv("MODEL_TOKEN", "8000"),
+        model=os.getenv("MODEL_NAME", "gpt-4.1"),
+        model_provider=os.getenv("MODEL_PROVIDER", "openai"),
+        api_key=os.getenv("MODEL_API_KEY"),
+        temperature=os.getenv("MODEL_TEMPERATURE", "0.1"),
+        max_tokens=os.getenv("MODEL_MAX_TOKENS", "8000"),
+        base_url=os.getenv("MODEL_BASE_URL") if os.getenv("MODEL_BASE_URL") else None
         )
     agent = create_tool_calling_agent(model, combined_tools, prompt)
-    return AgentExecutor(agent=agent, tools=combined_tools, verbose=True)
+    return AgentExecutor(agent=agent, tools=combined_tools, verbose=True, handle_parsing_errors=True)
 
 async def main():
-    runtime = os.getenv("CORAL_ORCHESTRATION_RUNTIME", "devmode")
-
-    if runtime == "docker" or runtime == "executable":
-        base_url = os.getenv("CORAL_SSE_URL")
-        agentID = os.getenv("CORAL_AGENT_ID")
-    else:
+    runtime = os.getenv("CORAL_ORCHESTRATION_RUNTIME", None)
+    if runtime is None:
         load_dotenv()
-        base_url = os.getenv("CORAL_SSE_URL")
-        agentID = os.getenv("CORAL_AGENT_ID")
+
+    base_url = os.getenv("CORAL_SSE_URL")
+    agentID = os.getenv("CORAL_AGENT_ID")
 
     coral_params = {
         "agentId": agentID,

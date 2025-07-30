@@ -91,37 +91,38 @@ Checkout: [How to Build a Multi-Agent System with Awesome Open Source Agents usi
 For Linux or MAC:
 
 ```bash
-# PROJECT_DIR="/PATH/TO/YOUR/PROJECT"
-
-applications:
-  - id: "app"
-    name: "Default Application"
-    description: "Default application for testing"
-    privacyKeys:
-      - "default-key"
-      - "public"
-      - "priv"
-
 registry:
+  # ... your other agents
   figmamcp_agent:
     options:
-       - name: "API_KEY"
+      - name: "MODEL_API_KEY"
         type: "string"
         description: "API key for the service"
+      - name: "MODEL_NAME"
+        type: "string"
+        description: "What model to use (e.g 'gpt-4.1-mini')"
+        default: "gpt-4.1-mini"
+      - name: "MODEL_PROVIDER"
+        type: "string"
+        description: "What model provider to use (e.g 'openai', etc)"
+        default: "openai"
+      - name: "MODEL_MAX_TOKENS"
+        type: "string"
+        description: "Max tokens to use"
+        default: "16000"
+      - name: "MODEL_TEMPERATURE"
+        type: "string"
+        description: "What model temperature to use"
+        default: "0.0"
     runtime:
       type: "executable"
-      command: ["bash", "-c", "${PROJECT_DIR}/run_agent.sh main.py"]
+      command: ["bash", "-c", "<replace with path to this agent>/run_agent.sh main.py"]
       environment:
-        - name: "API_KEY"
-          from: "API_KEY"
-        - name: "MODEL_NAME"
-          value: "gpt-4.1-mini"
-        - name: "MODEL_PROVIDER"
-          value: "openai"
-        - name: "MODEL_TOKEN"
-          value: "16000"
-        - name: "MODEL_TEMPERATURE"
-          value: "0.0"
+        - option: "MODEL_API_KEY"
+        - option: "MODEL_NAME"
+        - option: "MODEL_PROVIDER"
+        - option: "MODEL_MAX_TOKENS"
+        - option: "MODEL_TEMPERATURE"
 
 ```
 For Windows, create a powershell command (run_agent.ps1) and run:

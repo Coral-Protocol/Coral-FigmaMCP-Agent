@@ -46,7 +46,7 @@ async def create_agent(coral_tools, agent_tools):
         api_key=os.getenv("MODEL_API_KEY"),
         temperature=os.getenv("MODEL_TEMPERATURE", "0.1"),
         max_tokens=os.getenv("MODEL_MAX_TOKENS", "8000"),
-        base_url=os.getenv("MODEL_BASE_URL") if os.getenv("MODEL_BASE_URL") else None
+        base_url=os.getenv("MODEL_BASE_URL", None)
         )
     agent = create_tool_calling_agent(model, combined_tools, prompt)
     return AgentExecutor(agent=agent, tools=combined_tools, verbose=True, handle_parsing_errors=True)
@@ -69,13 +69,14 @@ async def main():
     CORAL_SERVER_URL = f"{base_url}?{query_string}"
     print(f"Connecting to Coral Server: {CORAL_SERVER_URL}")
     
+    timeout = os.getenv("TIMEOUT_MS", 300)
     client = MultiServerMCPClient(
 		connections = {
 			"coral": {
 				"transport": "sse",
 				"url": CORAL_SERVER_URL,
-				"timeout": 300,
-				"sse_read_timeout": 300
+				"timeout": timeout,
+				"sse_read_timeout": timeout
 			},
 			"figma_mcp": {"transport": 'sse', "url": 'http://127.0.0.1:3845/sse'}
 		}
